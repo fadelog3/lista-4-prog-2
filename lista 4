@@ -1,0 +1,56 @@
+class TreeNode:
+    def __init__(self, val=0):
+        self.val = val
+        self.left = None
+        self.right = None
+
+# Função para criar uma árvore binária de busca (BST) a partir de uma lista de nós
+def create_tree(nodes):
+    if not nodes:
+        return None
+    
+    root = TreeNode(nodes[0])
+    for n in nodes[1:]:
+        insert_node(root, n)
+
+    return root
+    
+def insert_node(root, value):
+    if value < root.val:
+        if root.left is None:
+            root.left = TreeNode(value)
+        else:
+            insert_node(root.left, value)
+    elif value > root.val:
+        if root.right is None:
+            root.right = TreeNode(value)
+        else:
+            insert_node(root.right, value)
+    else:
+        print(f"Valor duplicado {value} encontrado. BST não pode ter valores duplicados.")
+
+
+
+def altura(no):
+    if no is None:
+        return 0
+    altura_esquerda = altura(no.left)
+    altura_direita = altura(no.right)
+
+    if altura_esquerda == -1 or altura_direita == -1:
+        return -1
+    
+    if abs(altura_esquerda - altura_direita) > 1:
+        return -1
+
+    return max(altura_esquerda, altura_direita) + 1
+
+def is_balanceada(raiz):
+    return altura(raiz) != -1
+
+# Exemplo de uso
+nodes = [3, 1, 4, 2, 0, -1, 5 ]  # A lista de nós para criar a árvore
+
+raiz = create_tree(nodes)
+
+print(is_balanceada(raiz))
