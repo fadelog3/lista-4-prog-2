@@ -91,3 +91,25 @@ pilha = Pilha_lista([1, 2, 4, 5, 6])
 elemento_removido = pilha.pop()
 print(f'Elemento removido: {elemento_removido}')
 print(f'Estado da pilha: {pilha._data}')
+
+#Quetsão 4
+
+import numpy as np
+import scipy.stats as stats
+
+def gerar_pontos(n, distribuicao): #o usuário deve passar a distribuição no formato de string
+    if distribuicao == 'uniforme':
+        x = np.random.uniform(-1, 1, n)
+        y = np.random.uniform(-1, 1, n)
+    elif distribuicao == 'normal':
+        x = np.random.normal(0, 0.5, n)
+        y = np.random.normal(0, 0.5, n)
+    elif distribuicao == 't-student':
+        x = stats.t.rvs(df=1, loc=0, scale=0.5, size=n)  # df=1 para a distribuição t de Student
+        y = stats.t.rvs(df=1, loc=0, scale=0.5, size=n)
+    else:
+        raise ValueError("Distribuição não reconhecida. Escolha 'uniforme', 'normal' ou 't-student'.")
+
+    return np.array(list(zip(x, y)))
+
+gerar_pontos(9, "uniforme")
