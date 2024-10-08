@@ -113,4 +113,10 @@ def gerar_pontos(n, distribuicao):
     return np.array(list(zip(x, y)))
 
 
-gerar_pontos(9, "uniforme")
+pontos=gerar_pontos(9, "uniforme")
+
+def fecho_convexo(pontos):
+  poligono=ConvexHull(pontos)
+  return pontos[poligono.vertices]
+
+fecho_convexo(pontos)
