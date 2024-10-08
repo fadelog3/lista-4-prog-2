@@ -31,8 +31,6 @@ def insert_node(root, value):
     else:
         print(f"Valor duplicado {value} encontrado. BST não pode ter valores duplicados.")
 
-
-
 def altura(no):
     if no is None:
         return 0
@@ -114,6 +112,8 @@ def gerar_pontos(n, distribuicao):
 
 
 pontos=gerar_pontos(9, "uniforme")
+
+#Questão 5
 
 def fecho_convexo(pontos):
   poligono=ConvexHull(pontos)
