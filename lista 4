@@ -1,3 +1,5 @@
+#Questão 1
+
 class TreeNode:
     def __init__(self, val=0):
         self.val = val
@@ -54,3 +56,38 @@ nodes = [3, 1, 4, 2, 0, -1, 5 ]  # A lista de nós para criar a árvore
 raiz = create_tree(nodes)
 
 print(is_balanceada(raiz))
+
+
+#Questão 2
+
+import random
+
+class Pilha_lista:
+    def __init__(self, data=None) -> None:
+        if data is None:
+            self._data = []
+        else:
+            self._data = data
+
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("pop from empty stack")  # Levanta um erro se a pilha estiver vazia
+
+        k = random.randint(0, len(self._data) - 1)
+        self._data[k], self._data[-1] = self._data[-1], self._data[k]
+        return self._data.pop()
+    
+    def push(self, element):
+        self._data.append(element)
+    
+    def is_empty(self):
+        return len(self._data) == 0
+    
+    def size(self):
+        return len(self._data)
+
+# Testando a classe
+pilha = Pilha_lista([1, 2, 4, 5, 6])
+elemento_removido = pilha.pop()
+print(f'Elemento removido: {elemento_removido}')
+print(f'Estado da pilha: {pilha._data}')
