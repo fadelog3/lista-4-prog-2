@@ -97,19 +97,20 @@ print(f'Estado da pilha: {pilha._data}')
 import numpy as np
 import scipy.stats as stats
 
-def gerar_pontos(n, distribuicao): #o usuário deve passar a distribuição no formato de string
+def gerar_pontos(n, distribuicao):
     if distribuicao == 'uniforme':
-        x = np.random.uniform(-1, 1, n)
-        y = np.random.uniform(-1, 1, n)
+        x = stats.uniform.rvs(-1, 2, size=n)  # Intervalo [-1, 1] com largura 2
+        y = stats.uniform.rvs(-1, 2, size=n)
     elif distribuicao == 'normal':
-        x = np.random.normal(0, 0.5, n)
-        y = np.random.normal(0, 0.5, n)
+        x = stats.norm.rvs(loc=0, scale=0.5, size=n)
+        y = stats.norm.rvs(loc=0, scale=0.5, size=n)
     elif distribuicao == 't-student':
-        x = stats.t.rvs(df=1, loc=0, scale=0.5, size=n)  # df=1 para a distribuição t de Student
+        x = stats.t.rvs(df=1, loc=0, scale=0.5, size=n)
         y = stats.t.rvs(df=1, loc=0, scale=0.5, size=n)
     else:
         raise ValueError("Distribuição não reconhecida. Escolha 'uniforme', 'normal' ou 't-student'.")
 
     return np.array(list(zip(x, y)))
+
 
 gerar_pontos(9, "uniforme")
